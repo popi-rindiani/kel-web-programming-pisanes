@@ -4,24 +4,23 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreatePemilihTable extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+    public function up()
     {
         Schema::create('pemilih', function (Blueprint $table) {
             $table->id();
+            $table->string('nama_pemilih');
+            $table->string('alamat');
+            $table->string('no_telepon');
+            $table->string('email')->unique();
+            $table->enum('status_voting', ['sudah', 'belum'])->default('belum');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('pemilih');
     }
-};
+}
