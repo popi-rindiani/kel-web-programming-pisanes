@@ -13,11 +13,11 @@ class DatabaseSeeder extends Seeder
             PenggunaSeeder::class,
             CalonSeeder::class,
             PemilihSeeder::class,
-            VotingSeeder::class,
-            KategoriVotingSeeder::class,
             LaporanSeeder::class,
-            HasilVotingSeeder::class,
             PengaturanSeeder::class,
+            KategoriVotingSeeder::class,
+            HasilVotingSeeder::class,
+            VotingSeeder::class,
         ]);
     }
 }
