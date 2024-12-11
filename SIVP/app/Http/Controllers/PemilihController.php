@@ -2,63 +2,42 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\PemilihRequest;
+use App\Models\Pemilih;
 
 class PemilihController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $pemilih = Pemilih::all();
+        return view('pemilih.index', compact('pemilih'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('pemilih.form');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(PemilihRequest $request)
     {
-        //
+        Pemilih::create($request->validated());
+        return redirect()->route('pemilih.index')->with('success', 'Pemilih berhasil ditambahkan!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function edit(Pemilih $pemilih)
     {
-        //
+        return view('pemilih.form', compact('pemilih'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function update(PemilihRequest $request, Pemilih $pemilih)
     {
-        //
+        $pemilih->update($request->validated());
+        return redirect()->route('pemilih.index')->with('success', 'Pemilih berhasil diperbarui!');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function destroy(Pemilih $pemilih)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $pemilih->delete();
+        return redirect()->route('pemilih.index')->with('success', 'Pemilih berhasil dihapus!');
     }
 }
