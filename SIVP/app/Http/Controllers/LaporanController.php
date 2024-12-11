@@ -2,63 +2,42 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\LaporanRequest;
+use App\Models\Laporan;
 
 class LaporanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $laporan = Laporan::all();
+        return view('laporan.index', compact('laporan'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('laporan.form');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(LaporanRequest $request)
     {
-        //
+        Laporan::create($request->validated());
+        return redirect()->route('laporan.index')->with('success', 'Laporan berhasil ditambahkan!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function edit(Laporan $laporan)
     {
-        //
+        return view('laporan.form', compact('laporan'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function update(LaporanRequest $request, Laporan $laporan)
     {
-        //
+        $laporan->update($request->validated());
+        return redirect()->route('laporan.index')->with('success', 'Laporan berhasil diperbarui!');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function destroy(Laporan $laporan)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $laporan->delete();
+        return redirect()->route('laporan.index')->with('success', 'Laporan berhasil dihapus!');
     }
 }

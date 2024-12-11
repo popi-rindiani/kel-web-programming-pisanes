@@ -2,63 +2,42 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\VotingRequest;
+use App\Models\Voting;
 
 class VotingController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $voting = Voting::all();
+        return view('voting.index', compact('voting'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('voting.form');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(VotingRequest $request)
     {
-        //
+        Voting::create($request->validated());
+        return redirect()->route('voting.index')->with('success', 'Voting berhasil ditambahkan!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function edit(Voting $voting)
     {
-        //
+        return view('voting.form', compact('voting'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function update(VotingRequest $request, Voting $voting)
     {
-        //
+        $voting->update($request->validated());
+        return redirect()->route('voting.index')->with('success', 'Voting berhasil diperbarui!');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function destroy(Voting $voting)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $voting->delete();
+        return redirect()->route('voting.index')->with('success', 'Voting berhasil dihapus!');
     }
 }

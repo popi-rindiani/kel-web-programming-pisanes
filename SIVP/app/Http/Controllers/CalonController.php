@@ -2,63 +2,42 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\CalonRequest;
+use App\Models\Calon;
 
 class CalonController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $calon = Calon::all();
+        return view('calon.index', compact('calon'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('calon.form');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(CalonRequest $request)
     {
-        //
+        Calon::create($request->validated());
+        return redirect()->route('calon.index')->with('success', 'Calon berhasil ditambahkan!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function edit(Calon $calon)
     {
-        //
+        return view('calon.form', compact('calon'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function update(CalonRequest $request, Calon $calon)
     {
-        //
+        $calon->update($request->validated());
+        return redirect()->route('calon.index')->with('success', 'Calon berhasil diperbarui!');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function destroy(Calon $calon)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $calon->delete();
+        return redirect()->route('calon.index')->with('success', 'Calon berhasil dihapus!');
     }
 }

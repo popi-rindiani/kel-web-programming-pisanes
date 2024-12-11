@@ -2,63 +2,42 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\KategoriVotingRequest;
+use App\Models\KategoriVoting;
 
 class KategoriVotingController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $kategoriVoting = KategoriVoting::all();
+        return view('kategori_voting.index', compact('kategoriVoting'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('kategori_voting.form');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(KategoriVotingRequest $request)
     {
-        //
+        KategoriVoting::create($request->validated());
+        return redirect()->route('kategori_voting.index')->with('success', 'Kategori Voting berhasil ditambahkan!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function edit(KategoriVoting $kategoriVoting)
     {
-        //
+        return view('kategori_voting.form', compact('kategoriVoting'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function update(KategoriVotingRequest $request, KategoriVoting $kategoriVoting)
     {
-        //
+        $kategoriVoting->update($request->validated());
+        return redirect()->route('kategori_voting.index')->with('success', 'Kategori Voting berhasil diperbarui!');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function destroy(KategoriVoting $kategoriVoting)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $kategoriVoting->delete();
+        return redirect()->route('kategori_voting.index')->with('success', 'Kategori Voting berhasil dihapus!');
     }
 }
