@@ -8,7 +8,4 @@ use Illuminate\Database\Eloquent\Model;
 class Laporan extends Model
 {
     use HasFactory;
-
-    protected $table = 'laporan'; // Nama tabel
-    protected $fillable = ['judul_laporan', 'file_path', 'tanggal_laporan']; // Kolom yang bisa diisi
 }

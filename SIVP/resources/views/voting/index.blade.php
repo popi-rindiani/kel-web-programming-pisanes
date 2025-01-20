@@ -1,35 +1,50 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pemilihan Ketua RT dan RW</title>
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+</head>
+<body>
+    <h1>Pemilihan Ketua RT dan</h1>
 
-@section('content')
-<h1>Daftar Voting</h1>
+    @if(session('error'))
+        <div style="color: red;">
+            {{ session('error') }}
+        </div>
+    @endif
 
-<a href="{{ route('voting.create') }}" class="btn btn-primary mb-3">Tambah Voting</a>
+    @if(session('success'))
+        <div style="color: green;">
+            {{ session('success') }}
+        </div>
+    @endif
 
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Pemilih</th>
-            <th>Calon</th>
-            <th>Kategori Voting</th>
-            <th>Aksi</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach($voting as $v)
-            <tr>
-                <td>{{ $v->pemilih->nama_pemilih }}</td>
-                <td>{{ $v->calon->nama_calon }}</td>
-                <td>{{ $v->kategori_voting }}</td>
-                <td>
-                    <a href="{{ route('voting.edit', $v->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                    <form action="{{ route('voting.destroy', $v->id) }}" method="POST" style="display:inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus voting ini?')">Hapus</button>
-                    </form>
-                </td>
-            </tr>
+    <form action="{{ route('voting.vote') }}" method="post">
+        @csrf
+
+        <label for="pemilih_id">ID Pemilih:</label>
+        <input type="text" name="pemilih_id" required><br><br>
+
+        <label for="kategori_voting">Kategori Voting:</label>
+        <select name="kategori_voting" required>
+            <option value="RT">Ketua RT</option>
+            <option value="RW">Ketua RW</option>
+        </select><br><br>
+
+        <h3>Pilih Calon:</h3>
+        @foreach ($calons as $calon)
+            <div>
+                <input type="radio" name="calon_id" value="{{ $calon->id }}" required>
+                <img src="{{ asset('storage/'.$calon->foto) }}" alt="{{ $calon->nama_calon }}" width="100px">
+                <p><strong>{{ $calon->nama_calon }}</strong></p>
+                <p>{{ $calon->deskripsi }}</p>
+            </div>
         @endforeach
-    </tbody>
-</table>
-@endsection
+
+        <br>
+        <button type="submit">Vote</button>
+    </form>
+</body>
+</html>

@@ -2,42 +2,84 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\LaporanRequest;
 use App\Models\Laporan;
+use Illuminate\Http\Request;
 
 class LaporanController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-        $laporan = Laporan::all();
-        return view('laporan.index', compact('laporan'));
+        //
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
-        return view('laporan.form');
+        //
     }
 
-    public function store(LaporanRequest $request)
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
     {
-        Laporan::create($request->validated());
-        return redirect()->route('laporan.index')->with('success', 'Laporan berhasil ditambahkan!');
+        //
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Laporan  $laporan
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Laporan $laporan)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Laporan  $laporan
+     * @return \Illuminate\Http\Response
+     */
     public function edit(Laporan $laporan)
     {
-        return view('laporan.form', compact('laporan'));
+        //
     }
 
-    public function update(LaporanRequest $request, Laporan $laporan)
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Laporan  $laporan
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Laporan $laporan)
     {
-        $laporan->update($request->validated());
-        return redirect()->route('laporan.index')->with('success', 'Laporan berhasil diperbarui!');
+        //
     }
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Laporan  $laporan
+     * @return \Illuminate\Http\Response
+     */
     public function destroy(Laporan $laporan)
     {
-        $laporan->delete();
-        return redirect()->route('laporan.index')->with('success', 'Laporan berhasil dihapus!');
+        //
     }
 }

@@ -1,37 +1,33 @@
-@extends('layouts.app')
+@extends('layouts.tabler')
 
 @section('content')
-<h1>Daftar Hasil Voting</h1>
-
-<a href="{{ route('hasil_voting.create') }}" class="btn btn-primary mb-3">Tambah Hasil Voting</a>
-
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Pemilih</th>
-            <th>Nama Calon</th>
-            <th>Kategori Voting</th>
-            <th>Status Voting</th>
-            <th>Aksi</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach($hasilVoting as $hv)
+    <h1>Daftar Hasil Voting</h1>
+    <a href="{{ route('hasil_voting.create') }}">Tambah Hasil Voting</a>
+    <table>
+        <thead>
             <tr>
-                <td>{{ $hv->pemilih->nama_pemilih }}</td>
-                <td>{{ $hv->calon->nama_calon }}</td>
-                <td>{{ $hv->kategori_voting }}</td>
-                <td>{{ $hv->status_voting == 1 ? 'Sukses' : 'Gagal' }}</td>
-                <td>
-                    <a href="{{ route('hasil_voting.edit', $hv->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                    <form action="{{ route('hasil_voting.destroy', $hv->id) }}" method="POST" style="display:inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
-                    </form>
-                </td>
+                <th>Kategori Voting</th>
+                <th>Calon</th>
+                <th>Jumlah Suara</th>
+                <th>Aksi</th>
             </tr>
-        @endforeach
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach($hasilVoting as $hasil)
+                <tr>
+                    <td>{{ $hasil->kategoriVoting->nama_kategori }}</td>
+                    <td>{{ $hasil->calon->nama_calon }}</td>
+                    <td>{{ $hasil->jumlah_suara }}</td>
+                    <td>
+                        <a href="{{ route('hasil_voting.edit', $hasil->id) }}">Edit</a>
+                        <form action="{{ route('hasil_voting.destroy', $hasil->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit">Hapus</button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
 @endsection

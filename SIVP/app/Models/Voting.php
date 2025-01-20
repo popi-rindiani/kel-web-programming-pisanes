@@ -9,18 +9,27 @@ class Voting extends Model
 {
     use HasFactory;
 
-    protected $table = 'voting'; // Nama tabel
-    protected $fillable = ['pemilih_id', 'calon_id', 'kategori_voting']; // Kolom yang bisa diisi
+    protected $table = 'voting';
 
-    // Relasi ke tabel pemilih
-    public function pemilih()
-    {
-        return $this->belongsTo(Pemilih::class, 'pemilih_id');
-    }
+    protected $fillable = ['pemilih_id', 'calon_id', 'kategori_voting_id']; // Pastikan kolom ini ada
 
-    // Relasi ke tabel calon
     public function calon()
     {
         return $this->belongsTo(Calon::class, 'calon_id');
+    }
+
+    public function kategoriVoting()
+    {
+        return $this->belongsTo(KategoriVoting::class, 'kategori_voting_id');
+    }
+
+    public function hasilvoting()
+    {
+        return $this->belongsTo(HasilVoting::class, 'kategori_voting_id');
+    }
+
+    public function pemilih()
+    {
+        return $this->belongsTo(Pemilih::class, 'pemilih_id');
     }
 }

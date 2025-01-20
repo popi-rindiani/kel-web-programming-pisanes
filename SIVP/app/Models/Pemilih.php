@@ -9,12 +9,22 @@ class Pemilih extends Model
 {
     use HasFactory;
 
-    protected $table = 'pemilih'; // Nama tabel
-    protected $fillable = ['nama_pemilih', 'alamat', 'no_telepon', 'email', 'status_voting']; // Kolom yang bisa diisi
+    protected $table = 'pemilih';
 
-    // Relasi ke tabel voting
+    protected $fillable = [
+        'nama_pemilih',
+        'alamat',
+        'no_telepon',
+        'email',
+        'status_voting',
+    ];
+
+    // Relasi One-to-Many dengan Voting
     public function voting()
     {
-        return $this->hasMany(Voting::class, 'pemilih_id');
+        return $this->hasMany(Voting::class);
     }
+
+        
+    
 }

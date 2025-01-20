@@ -9,12 +9,10 @@ class KategoriVoting extends Model
 {
     use HasFactory;
 
-    protected $table = 'kategori_voting'; // Nama tabel
-    protected $fillable = ['nama_kategori', 'deskripsi']; // Kolom yang bisa diisi
+    protected $table = 'kategori_voting';
 
-    // Relasi ke tabel hasil_voting
-    public function hasilVoting()
-    {
-        return $this->hasMany(KategoriVoting::class, 'kategori_voting_id');
-    }
+    protected $fillable = [
+        'nama_kategori',
+        'deskripsi',
+    ];
 }

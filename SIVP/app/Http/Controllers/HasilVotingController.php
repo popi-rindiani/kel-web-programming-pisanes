@@ -3,66 +3,67 @@
 namespace App\Http\Controllers;
 
 use App\Models\HasilVoting;
-use App\Models\Pemilih;
+use App\Models\KategoriVoting;
 use App\Models\Calon;
 use Illuminate\Http\Request;
 
 class HasilVotingController extends Controller
 {
-    // Menampilkan Daftar Hasil Voting
+    // Menampilkan daftar hasil voting
     public function index()
     {
-        // Ambil data hasil voting beserta relasi dengan pemilih dan calon
-        $hasilVoting = HasilVoting::with(['pemilih', 'calon'])->get();
+        $hasilVoting = HasilVoting::with(['kategoriVoting', 'calon'])->get();
         return view('hasil_voting.index', compact('hasilVoting'));
     }
 
-    // Menampilkan Form untuk Tambah/Edit Hasil Voting
-    public function form($id = null)
+    // Menampilkan form untuk membuat hasil voting baru
+    public function create()
     {
-        // Ambil data hasil voting jika ID diberikan
-        $hasilVoting = $id ? HasilVoting::findOrFail($id) : null;
-
-        // Ambil data pemilih dan calon untuk dropdown di form
-        $pemilih = Pemilih::all();
-        $calon = Calon::all();
-
-        // Tampilkan view form
-        return view('hasil_voting.form', compact('hasilVoting', 'pemilih', 'calon'));
+        $kategoriVoting = KategoriVoting::all();
+        $calons = Calon::all();
+        return view('hasil_voting.create', compact('kategoriVoting', 'calons'));
     }
 
-    // Menyimpan Data Hasil Voting
+    // Menyimpan hasil voting baru
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'pemilih_id' => 'required|exists:pemilih,id',
+        $request->validate([
+            'kategori_voting_id' => 'required|exists:kategori_voting,id',
             'calon_id' => 'required|exists:calon,id',
-            'kategori_voting' => 'required|string|max:255',
-            'status_voting' => 'required|boolean',
+            'jumlah_suara' => 'required|integer|min:0',
         ]);
 
-        HasilVoting::create($validated);
+        HasilVoting::create($request->all());
 
-        return redirect()->route('hasil_voting.index')->with('success', 'Hasil voting berhasil ditambahkan!');
+        return redirect()->route('hasil_voting.index')->with('success', 'Data berhasil disimpan!');
     }
 
-    // Mengupdate Data Hasil Voting
+    // Menampilkan form untuk mengedit hasil voting
+    public function edit($id)
+    {
+        $hasilVoting = HasilVoting::findOrFail($id);
+        $kategoriVoting = KategoriVoting::all();
+        $calons = Calon::all();
+
+        return view('hasil_voting.edit', compact('hasilVoting', 'kategoriVoting', 'calons'));
+    }
+
+    // Mengupdate hasil voting
     public function update(Request $request, $id)
     {
-        $validated = $request->validate([
-            'pemilih_id' => 'required|exists:pemilih,id',
+        $request->validate([
+            'kategori_voting_id' => 'required|exists:kategori_voting,id',
             'calon_id' => 'required|exists:calon,id',
-            'kategori_voting' => 'required|string|max:255',
-            'status_voting' => 'required|boolean',
+            'jumlah_suara' => 'required|integer|min:0',
         ]);
 
         $hasilVoting = HasilVoting::findOrFail($id);
-        $hasilVoting->update($validated);
+        $hasilVoting->update($request->all());
 
-        return redirect()->route('hasil_voting.index')->with('success', 'Hasil voting berhasil diperbarui!');
+        return redirect()->route('hasil_voting.index')->with('success', 'Data berhasil diperbarui!');
     }
 
-    // Menghapus Data Hasil Voting
+    // Menghapus hasil voting
     public function destroy($id)
     {
         $hasilVoting = HasilVoting::findOrFail($id);
@@ -71,4 +72,3 @@ class HasilVotingController extends Controller
         return redirect()->route('hasil_voting.index')->with('success', 'Data berhasil dihapus!');
     }
 }
-

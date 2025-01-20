@@ -8,13 +8,26 @@ use Illuminate\Database\Eloquent\Model;
 class Calon extends Model
 {
     use HasFactory;
+    
+    protected $table = 'calon'; // Tentukan nama tabel secara eksplisit
 
-    protected $table = 'calon'; // Nama tabel
-    protected $fillable = ['nama_calon', 'foto', 'deskripsi', 'kategori', 'status']; // Kolom yang bisa diisi
+    protected $fillable = [
+        'nama_calon',
+        'foto',
+        'deskripsi',
+        'kategori',
+        'status',
+        'kategori_voting_id', // Menambahkan kolom kategori_voting_id
+    ];
 
-    // Relasi ke tabel hasil_voting
-    public function hasilVoting()
+    public function kategoriVoting()
     {
-        return $this->hasOne(Calon::class, 'calon_id');
+        return $this->belongsTo(KategoriVoting::class, 'kategori_voting_id');
     }
+
+    public function voting()
+    {
+        return $this->hasMany(Voting::class);
+    }
+
 }
