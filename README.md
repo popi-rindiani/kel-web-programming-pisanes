@@ -1,6 +1,6 @@
 # SISTEM INFORMASI PEMILIHAN RT DAN RW
 ---
-#Anggota Kelompok
+## Anggota Kelompok
 - Veronika Agnes (15225003)
 - Elsa Mutia Sari (15225009)
 - Popi Rindiani (15225010)
@@ -13,11 +13,11 @@ Dosen Pengampu: Agung Sasongko, S. Kom, M. Kom.
 
 ---
 # Deskripsi Project 
-##Sistem Informasi pemilihan RT dan RW adalah sebuah platform digital yang mempermudah masyarakat dalam pemilihan ketua RT dan RW secara online.Proyek ini dibuat sebagai bagian dari tugas Ujian Akhir Semester (UAS) mata kuliah Web Programming 2 yang diajar oleh Bapak Agung Sasongko, S.kom, M.Kom.
+## Sistem Informasi pemilihan RT dan RW adalah sebuah platform digital yang mempermudah masyarakat dalam pemilihan ketua RT dan RW secara online.Proyek ini dibuat sebagai bagian dari tugas Ujian Akhir Semester (UAS) mata kuliah Web Programming 2 yang diajar oleh Bapak Agung Sasongko, S.kom, M.Kom.
 
 ---
 # Cara Penggunaan 
-1. Pertama harus login sebagai admin yg telah di daftar kan (suteja@gmail.com )
+1. Pertama harus login sebagai admin yg telah di daftar kan (suteja@gmail.com dengan password 123)
 2. admin yg akan mendaftarkan masyarakat pada menu konfigurasi/users
 3. admin akan menambahkan\mendaftarkan pemilih pada menu data master\pemilih (tombol tambah pemilih )
 4. masyarakat hanya bisa mengakses pada menu voting. masyarakat dapat memilih calon kandidat pada menu voting tersebut
