@@ -5,7 +5,7 @@
 - Elsa Mutia Sari (15225009)
 - Popi Rindiani (15225010)
 ---
-Universitas Bina Sarana Informatika Kampus Kota Pontianak
+*Universitas Bina Sarana Informatika Kampus Kota Pontianak
 Program Studi Informatika Kampus Kota Pontianak
 Kelas: 15.4A.30
 Mata Kuliah: Web Programming 2
