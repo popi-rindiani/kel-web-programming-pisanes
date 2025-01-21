@@ -5,11 +5,11 @@
 - Elsa Mutia Sari (15225009)
 - Popi Rindiani (15225010)
 ---
-*Universitas Bina Sarana Informatika Kampus Kota Pontianak
-Program Studi Informatika Kampus Kota Pontianak
-Kelas: 15.4A.30
-Mata Kuliah: Web Programming 2
-Dosen Pengampu: Agung Sasongko, S. Kom, M. Kom.
+1. Universitas Bina Sarana Informatika Kampus Kota Pontianak
+2. Program Studi Informatika Kampus Kota Pontianak
+3. Kelas: 15.4A.30
+4. Mata Kuliah: Web Programming 2
+5. Dosen Pengampu: Agung Sasongko, S. Kom, M. Kom.
 
 ---
 # Deskripsi Project 
