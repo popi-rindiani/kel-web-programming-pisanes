@@ -13,7 +13,7 @@
 
 ---
 # Deskripsi Project 
-## Sistem Informasi pemilihan RT dan RW adalah sebuah platform digital yang mempermudah masyarakat dalam pemilihan ketua RT dan RW secara online.Proyek ini dibuat sebagai bagian dari tugas Ujian Akhir Semester (UAS) mata kuliah Web Programming 2 yang diajar oleh Bapak Agung Sasongko, S.kom, M.Kom.
+Sistem Informasi pemilihan RT dan RW adalah sebuah platform digital yang mempermudah masyarakat dalam pemilihan ketua RT dan RW secara online.Proyek ini dibuat sebagai bagian dari tugas Ujian Akhir Semester (UAS) mata kuliah Web Programming 2 yang diajar oleh Bapak Agung Sasongko, S.kom, M.Kom.
 
 ---
 # Cara Penggunaan 
